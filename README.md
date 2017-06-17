@@ -5,7 +5,7 @@ It acts as a wrapper for [textract](https://github.com/dbashford/textract) and u
 
 * Author: [Sascha Zarhuber](https://sascha.work)
 * GitHub: [@saschazar21](https://github.com/saschazar21)
-* Twitter: [@saschazar](https://twitter.com/saschazar21)
+* Twitter: [@saschazar](https://twitter.com/saschazar)
 * Source: [https://github.com/saschazar21/metalsmith-pure-text](https://github.com/saschazar21/metalsmith-pure-text)
 * Issues: [https://github.com/saschazar21/metalsmith-pure-text/issues](https://github.com/saschazar21/metalsmith-pure-text/issues)
 * Releases: [https://github.com/saschazar21/metalsmith-pure-text/releases](https://github.com/saschazar21/metalsmith-pure-text/releases)
