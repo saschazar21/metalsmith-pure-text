@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-pure-text",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Metalsmith plugin for extracting text from source files using textract.",
   "main": "index.js",
   "scripts": {
