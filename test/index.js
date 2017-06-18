@@ -1,3 +1,6 @@
+/* global before */
+/* global describe */
+/* global it */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 
 /**
@@ -44,7 +47,8 @@ before('Build Metalsmith demo project', function setupTest(done) {
 describe('Test #1', function processMetalsmith() {
   this.timeout(5000);
 
-  it('should process markdown files', function handleMarkdownOnly(done) {
+  it('should process markdown files', (done) => {
+    debug('Now reading post.html');
     return fs.readFile(path.resolve(__dirname, './out/post.html'), 'utf8', (error, text) => {
       if (text && text.length > 0) {
         return done();
@@ -53,7 +57,8 @@ describe('Test #1', function processMetalsmith() {
     });
   });
 
-  it('should not process HTML files', function dontHandleHTML(done) {
+  it('should not process HTML files', (done) => {
+    debug('Now reading index.html...');
     return fs.readFile(path.resolve(__dirname, './out/index.html'), 'utf8', (error, text) => {
       if (error) {
         return done(error);
