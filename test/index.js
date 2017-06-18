@@ -130,3 +130,20 @@ describe('Test #2', function processMetalsmith() {
     });
   });
 });
+
+/* ----- Test section 3 ----- */
+
+describe('Test #3', function processMetalsmith() {
+  this.timeout(5000);
+  it('should fail to build Metalsmith', (done) => {
+    const config = {
+      pattern: ['**/*.html'],    // this time processing only HTML files
+      upperCase: true,           // configuration is malformed, only one
+      lowerCase: true,           // property is allowed here.
+      preserveLineBreaks: true,
+    };
+    assert.throws(() => buildMetalsmith(config), 'Please provide only one property: upperCase OR lowerCase!');
+
+    return done();
+  });
+});

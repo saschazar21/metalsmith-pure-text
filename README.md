@@ -19,12 +19,28 @@ It acts as a wrapper for [textract](https://github.com/dbashford/textract) and u
 `npm install metalsmith-pure-text`
 
 ## Options
-The plugin takes an object containing different textract options - please look them up at textracts [GitHub repository](https://github.com/dbashford/textract).  
-Additionally, it can be configured to filter specific file suffixes by providing a `pattern` option:  
+The plugin takes an object containing different textract options - please look them up at textracts [GitHub repository](https://github.com/dbashford/textract).
+
+Additionally, some custom options are possible:
+
+### pattern
+It can be configured to filter specific file suffixes by providing a `pattern` option:  
 
 ```JavaScript
 {
   "pattern": "**/*.html"    // string for one pattern only, array for multiple patterns
+}
+```
+
+### upperCase/lowerCase
+The outcome may be modified to contain only uppercase or lowercase letters. This can be done by adding **only one** key to the configuration:
+
+```JavaScript
+{
+  // either:
+  "lowerCase": true
+  // or:
+  "upperCase": true
 }
 ```
 
@@ -89,4 +105,5 @@ MIT
 * Handle image data
 
 ## Changelog
+* **v1.1.0** - Added `lowerCase`/`upperCase` functionality, removed whitespace from text outcome.
 * **v1.0.0** - Initial version
