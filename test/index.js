@@ -1,4 +1,3 @@
-/* global before */
 /* global describe */
 /* global it */
 /* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
@@ -7,6 +6,7 @@
  * Import necessary modules
  */
 const Metalsmith = require('metalsmith');
+const assert = require('chai').assert;
 const debug = require('debug')('metalsmith-pure-text');
 const fs = require('fs');
 const layouts = require('metalsmith-layouts');
@@ -15,15 +15,11 @@ const path = require('path');
 
 const pureText = require('../index');
 
-before('Build Metalsmith demo project', function setupTest(done) {
-  this.timeout(5000);
+function buildMetalsmith(pureTextOptions) {
   const metalsmith = Metalsmith(__dirname)
   .source('./src')
   .destination('./out')
-  .use(pureText({
-    pattern: ['**/*.md'],
-    preserveLineBreaks: true,
-  }))
+  .use(pureText(pureTextOptions))
   .use(markdown())
   .use(layouts({
     engine: 'handlebars',
@@ -32,20 +28,27 @@ before('Build Metalsmith demo project', function setupTest(done) {
     pattern: ['**/*.html'],
     rename: true,
   }));
-
-  metalsmith.build((err) => {
-    if (err) {
-      debug(`Error: ${err.message || err}`);
-      return done(err);
-    }
-
-    debug('Demo project built successfully.');
-    return done();
-  });
-});
+  return metalsmith;
+}
 
 describe('Test #1', function processMetalsmith() {
   this.timeout(5000);
+  it('should build Metalsmith without any error', (done) => {
+    const metalsmith = buildMetalsmith({
+      pattern: ['**/*.md'],
+      preserveLineBreaks: true,
+    });
+
+    metalsmith.build((err) => {
+      if (err) {
+        debug(`Error: ${err.message || err}`);
+        return done(err);
+      }
+
+      debug('Demo project built successfully.');
+      return done();
+    });
+  });
 
   it('should process markdown files', (done) => {
     debug('Now reading post.html');
@@ -70,6 +73,59 @@ describe('Test #1', function processMetalsmith() {
         debug(text.length);
         return done(new Error('index.html: there should not be any text.'));
       }
+      return done();
+    });
+  });
+});
+
+/* ----- Test section 2 ----- */
+
+describe('Test #2', function processMetalsmith() {
+  this.timeout(5000);
+  it('should build Metalsmith without any error', (done) => {
+    const metalsmith = buildMetalsmith({
+      pattern: ['**/*.html'],    // this time processing only HTML files
+      upperCase: true,
+      preserveLineBreaks: true,
+    });
+
+    metalsmith.build((err) => {
+      if (err) {
+        debug(`Error: ${err.message || err}`);
+        return done(err);
+      }
+
+      debug('Demo project built successfully.');
+      return done();
+    });
+  });
+
+  it('should not process markdown files', (done) => {
+    debug('Now reading post.html...');
+    return fs.readFile(path.resolve(__dirname, './out/post.html'), 'utf8', (error, text) => {
+      if (error) {
+        return done(error);
+      }
+
+      // Filter new lines, as they also count as character
+      const filteredNewLines = text.replace('\n', '');
+      if (filteredNewLines.length > 0) {
+        debug(text.length);
+        return done(new Error('post.html: there should not be any text.'));
+      }
+      return done();
+    });
+  });
+
+  it('should transform text to upper case in HTML files', (done) => {
+    debug('Now reading index.html...');
+    return fs.readFile(path.resolve(__dirname, './out/index.html'), 'utf8', (error, text) => {
+      if (error) {
+        return done(error);
+      }
+      assert.typeOf(text, 'string', 'Text is a string.');
+      assert.equal(text, text.toUpperCase(), 'Text is in upper case.');
+      assert.isAbove(text.length, 20, 'Text is longer than 20 characters');
       return done();
     });
   });
