@@ -147,3 +147,22 @@ describe('Test #3', function processMetalsmith() {
     return done();
   });
 });
+
+/* ----- Test section 4 ----- */
+
+describe('Test #4', function processMetalsmith() {
+  this.timeout(5000);
+  it('should extract text as base64-encoded string', (done) => {
+    const config = {
+      pattern: ['**/*.html'],
+      encoding: 'html',
+    };
+    const metal = buildMetalsmith(config);
+    metal.build((err) => {
+      if (err) {
+        return done(err);
+      }
+      return done();
+    });
+  });
+});
