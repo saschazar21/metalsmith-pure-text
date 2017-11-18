@@ -155,7 +155,7 @@ describe('Test #4', function processMetalsmith() {
   it('should extract text as base64-encoded string', (done) => {
     const config = {
       pattern: ['**/*.html'],
-      encoding: 'html',
+      encoding: 'base64',
     };
     const metal = buildMetalsmith(config);
     metal.build((err) => {
