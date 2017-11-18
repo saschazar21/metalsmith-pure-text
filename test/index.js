@@ -153,16 +153,25 @@ describe('Test #3', function processMetalsmith() {
 describe('Test #4', function processMetalsmith() {
   this.timeout(5000);
   it('should extract text as base64-encoded string', (done) => {
+    const base64regex = /^[a-z0-9+\/]+\=*$/igm; // base64 allowed characters; no space, not hyphens, no umlauts whatsoever...
     const config = {
       pattern: ['**/*.html'],
       encoding: 'base64',
     };
     const metal = buildMetalsmith(config);
+
+    const openFile = () => fs.readFile(path.resolve(__dirname, './out/index.html'), 'utf8', (err, text) => {
+      if (base64regex.test(text)) {
+        return done();
+      }
+      return done(new Error('No base64 encoded text!'));
+    });
+
     metal.build((err) => {
       if (err) {
         return done(err);
       }
-      return done();
+      return openFile();
     });
   });
 });

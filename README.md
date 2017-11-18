@@ -23,6 +23,15 @@ The plugin takes an object containing different textract options - please look t
 
 Additionally, some custom options are possible:
 
+### encoding
+It can be either `base64` or `html` encoded, to provide a sane string without any unwanted special characters:
+
+```JavaScript
+{
+  "encoding": "base64"      // ...or "html" for HTML-encoded strings
+}
+```
+
 ### pattern
 It can be configured to filter specific file suffixes by providing a `pattern` option:  
 
@@ -105,5 +114,6 @@ MIT
 * Handle image data
 
 ## Changelog
+* **v1.2.0** - Added `encoding` functionality to encode the outcome either in **base64** or **html**-compatible strings.
 * **v1.1.0** - Added `lowerCase`/`upperCase` functionality, removed whitespace from text outcome.
 * **v1.0.0** - Initial version
