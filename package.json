@@ -46,8 +46,8 @@
     "mocha": "^3.4.2"
   },
   "dependencies": {
-    "debug": "^2.6.8",
+    "debug": "^2.6.9",
     "multimatch": "^2.1.0",
-    "textract": "^2.1.2"
+    "textract": "^2.2.0"
   }
 }

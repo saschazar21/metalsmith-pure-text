@@ -430,9 +430,15 @@ debug@2.6.0:
   dependencies:
     ms "0.7.2"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.6.8:
+debug@^2.1.1, debug@^2.2.0:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
+  dependencies:
+    ms "2.0.0"
+
+debug@^2.6.9:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
     ms "2.0.0"
 
@@ -1982,9 +1988,9 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-textract@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/textract/-/textract-2.1.2.tgz#a39480910a74659f2d85313d1b32d67c36d5ad84"
+textract@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/textract/-/textract-2.2.0.tgz#da539302f6da8ccdb539cb36ca898028a3a554d6"
   dependencies:
     cheerio "0.22.0"
     got "5.7.1"
